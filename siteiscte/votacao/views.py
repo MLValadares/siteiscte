@@ -43,5 +43,7 @@ def criarquestao(request):
     return render(request, 'votacao/criarquestao.html')
 
 def createquestion(request):
-    q = Questao(questao_texto=request.POST['questaotexto'],pub_data=timezone.now())
-    return render(request, )
+    print(request.POST['questaotexto'])
+    # q = Questao(questao_texto=request.POST['questaotexto'],pub_data=timezone.now())
+    # q.save()
+    return render(request, 'votacao/index.html')
