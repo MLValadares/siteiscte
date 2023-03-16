@@ -39,5 +39,6 @@ def voto(request, questao_id):
     return HttpResponseRedirect(reverse('votacao:resultados',args=(questao.id,)))
 
 def criarquestao(request):
-    context = {}
-    return(request, 'votacao/criarquestao.html', context)
+    return HttpResponse("test.")
+    # context = {}
+    # return(request, 'votacao/criarquestao.html', context)
