@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404, render
 from django.http import Http404, HttpResponse,HttpResponseRedirect
 from django.template import loader
 from django.urls import reverse
+from django.utils import timezone
 
 from .models import Questao, Opcao
 
@@ -40,5 +41,7 @@ def voto(request, questao_id):
 
 def criarquestao(request):
     return render(request, 'votacao/criarquestao.html')
-    # context = {}
-    # return(request, 'votacao/criarquestao.html', context)
+
+def createquestion(request):
+    q = Questao(questao_texto=request.POST['questaotexto'],pub_data=timezone.now())
+    return render(request, )
