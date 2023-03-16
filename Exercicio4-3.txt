@@ -1,0 +1,15 @@
+a)
+In[1]: from votacao.models import Questao, Opcao
+In[2]: Questao.objects.all()
+Out[3]: <QuerySet [<Questao: Entao sempre nos decidimos a fazer uma festa no fim do ano? >, <Questao: Gostas de programar para a Internet?>, <Questao: No próximo ano, vão fazer mestrado?>]>
+b)
+In[4]: q=Questao.objects.filter(questao_texto__startswith='Gostas de programar').first()
+In[5]: q.opcao_set.all()
+Out[6]: <QuerySet [<Opcao: Adoro>, <Opcao: Gosto>, <Opcao: Mais ou menos>, <Opcao: Nem por isso>, <Opcao: Detesto>]>
+c)
+In[7]: q.opcao_set.filter(votos__gte=2)
+Out[8]: <QuerySet [<Opcao: Gosto>, <Opcao: Mais ou menos>, <Opcao: Nem por isso>]>
+d)
+In[9]: current_year = timezone.now().year-3
+In[10]: q=Questao.objects.filter(pub_data__year__gte=current_year)
+Out[11]: <QuerySet [<Questao: Entao sempre nos decidimos a fazer uma festa no fim do ano? >, <Questao: Gostas de programar para a Internet?>, <Questao: No próximo ano, vão fazer mestrado?>]>
