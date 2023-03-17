@@ -1,4 +1,4 @@
-<h1>{{ questao.questao_texto }}</h1>
+<h1>{{ questao.questao_id }}</h1>
 {% if error_message %}
 <p><strong>{{ error_message }}</strong></p>
 {% endif %}
@@ -8,5 +8,5 @@
     <input type="text" id="opcaotexto" name="opcaotexto"><br><br>
     <input type="submit" value="Gravar nova Opção">
 </form>
-<a href="{% url 'votacao:detalhe' questao.id %}">Voltar</a>
+<a href="{% url 'votacao:detalhe' questao.id %}">Voltar</a><br>
 <a href="{% url 'votacao:index' %}">Index</a>
