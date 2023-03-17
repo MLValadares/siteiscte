@@ -3,6 +3,7 @@ from django.http import Http404, HttpResponse,HttpResponseRedirect
 from django.template import loader
 from django.urls import reverse
 from django.utils import timezone
+from django.template import RequestContext
 
 from .models import Questao, Opcao
 
@@ -43,7 +44,12 @@ def criarquestao(request):
     return render(request, 'votacao/criarquestao.html')
 
 def createquestion(request):
-    print(request.POST['questaotexto'])
-    # q = Questao(questao_texto=request.POST['questaotexto'],pub_data=timezone.now())
-    # q.save()
-    return render(request, 'votacao/index.html')
+    if request.POST['questaotexto']=="":
+        return render(request, 'votacao/criarquestao.html',{'error_message': "Não introduziu um texto", })
+    q = Questao(questao_texto=request.POST['questaotexto'],pub_data=timezone.now())
+    q.save()
+    return render(request, 'votacao/criarquestao.html', {'error_message': "Nova pergunta criada", })
+
+def criaropcao(request, questao_id):
+    questao = get_object_or_404(Questao, pk=questao_id)
+    return render(request, 'votacao/criaropcao.html', {'questao': questao})

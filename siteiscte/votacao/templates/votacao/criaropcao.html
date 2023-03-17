@@ -1,0 +1,6 @@
+<h1>{{ questao.questao_texto }}</h1>
+<form method="post">
+    {% csrf_token %}
+</form>
+<a href="{% url 'votacao:detalhe' questao.id %}">Voltar</a>
+<a href="{% url 'votacao:index' %}">Index</a>

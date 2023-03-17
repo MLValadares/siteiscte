@@ -1,6 +1,10 @@
-<br>
-<form action="votacao:createquestion" method="post">
+{% if error_message %}
+<p><strong>{{ error_message }}</strong></p>
+{% endif %}
+<form action="{% url 'votacao:createquestion' %}" method="post">
+    {% csrf_token %}
     <label for="questaotexto">Texto da nova Questão:</label>
     <input type="text" id="questaotexto" name="questaotexto"><br><br>
     <input type="submit" value="Gravar nova questão">
 </form>
+<a href="{% url 'votacao:index' %}">Index</a>
