@@ -57,6 +57,6 @@ def criaropcao(request, questao_id):
 def createoption(request, questao_id):
     if request.POST['opcaotexto'] == "":
         return render(request, 'votacao/criaropcao.html', {'error_message': "Não introduziu um texto", })
-    o = Opcao(questao=questao_id,opcao_texto=request.POST['opcaotexto'],votos=0)
+    o = Opcao(opcao_texto=request.POST['opcaotexto'],votos=0,questao_id=questao_id)
     o.save()
     return render(request, 'votacao/criaropcao.html', {'error_message': "Nova opção criada", })
