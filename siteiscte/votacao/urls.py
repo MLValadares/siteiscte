@@ -16,5 +16,7 @@ path('criarvotacao', views.criarquestao, name='criarquestao'),
 # votacao/createquestion
 path('createquestion', views.createquestion, name='createquestion'),
 # votacao/1/criaropcao
-path('<int:questao_id>/criaropcao', views.criaropcao, name='criaropcao')
+path('<int:questao_id>/criaropcao', views.criaropcao, name='criaropcao'),
+# votacao/1/createoption
+path('<int:questao_id>/createoption', views.createoption, name='createoption')
 ]

@@ -53,3 +53,10 @@ def createquestion(request):
 def criaropcao(request, questao_id):
     questao = get_object_or_404(Questao, pk=questao_id)
     return render(request, 'votacao/criaropcao.html', {'questao': questao})
+
+def createoption(request, questao_id):
+    if request.POST['opcaotexto'] == "":
+        return render(request, 'votacao/criaropcao.html', {'error_message': "Não introduziu um texto", })
+    o = Opcao(questao=questao_id,opcao_texto=request.POST['opcaotexto'],votos=0)
+    o.save()
+    return render(request, 'votacao/criaropcao.html', {'error_message': "Nova opção criada", })
