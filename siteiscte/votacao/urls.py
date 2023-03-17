@@ -11,10 +11,10 @@ path('<int:questao_id>', views.detalhe, name='detalhe'),
 path('<int:questao_id>/resultados', views.resultados, name='resultados'),
 # ex: votacao/5/voto
 path('<int:questao_id>/voto', views.voto, name='voto'),
-# votacao/1/criaropcao
-path('<int:questao_id>/criaropcao', views.criaropcao, name='criaropcao'),
 # votacao/criarquestao
 path('criarvotacao', views.criarquestao, name='criarquestao'),
 # votacao/createquestion
-path('createquestion', views.createquestion, name='createquestion')
+path('createquestion', views.createquestion, name='createquestion'),
+# votacao/1/criaropcao
+path('<int:questao_id>/criaropcao', views.criaropcao, name='criaropcao')
 ]

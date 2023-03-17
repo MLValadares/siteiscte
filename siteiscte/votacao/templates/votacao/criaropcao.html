@@ -1,6 +1,9 @@
 <h1>{{ questao.questao_texto }}</h1>
-<form method="post">
+<form action="" method="post">
     {% csrf_token %}
+    <label for="opcaotexto">Texto da nova Opção:</label>
+    <input type="text" id="opcaotexto" name="opcaotexto"><br><br>
+    <input type="submit" value="Gravar nova Opção">
 </form>
 <a href="{% url 'votacao:detalhe' questao.id %}">Voltar</a>
 <a href="{% url 'votacao:index' %}">Index</a>

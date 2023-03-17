@@ -13,5 +13,7 @@
     {% endfor %}
     <input type="submit" value="Voto" />
 </form>
-<a href="{% url 'votacao:criaropcao' questao.id %}">Criar nova Opção</a>
+<form action="{% url 'votacao:criaropcao' questao.id %}">
+    <input type="submit" value="Criar nova Opção" />
+</form>
 <a href="{% url 'votacao:index' %}">Index</a>
