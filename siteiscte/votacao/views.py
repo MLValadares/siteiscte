@@ -66,6 +66,23 @@ def createoption(request, questao_id):
     return render(request, 'votacao/criaropcao.html', {'questao': questao, 'error_message': "Nova opção criada"})
 
 
+def logar(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username,
+                            password=password)
+        if user is not None:
+            login(request, user)
+            return render(request, 'votacao/index.html')
+        else:
+            return render(request, 'votacao/registar.html', {'error_message': "Erro ao criar a sua conta", })
+    else:
+        # se a invocação não veio do form, isto é, o 1º passo
+        return render(request, 'votacao/registar.html')
+
+
+
 
 def registar(request):
  if request.method == 'POST':

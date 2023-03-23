@@ -1,22 +1,18 @@
 <header style="text-align:center;">
 
-		<h1>LEI - Question Simulator - Register</h1>
+		<h1>LEI - Question Simulator - Login</h1>
 </header>
 {% if error_message %}
 <p><strong>{{ error_message }}</strong></p>
 {% endif %}
 
-<form action="{% url 'votacao:registar' %}" method="post">
+<form action="{% url 'votacao:logar' %}" method="post">
     {% csrf_token %}
     <label for="username">Introduza o seu nome:</label>
     <input type="text" id="username" name="username"><br><br>
     <label for="password">Introduza a sua password:</label>
     <input type="text" id="password" name="password"><br><br>
-    <label for="username">Introduza o seu email:</label>
-    <input type="text" id="email" name="email"><br><br>
-    <label for="password">Introduza a seu curso:</label>
-    <input type="text" id="curso" name="curso"><br><br>
 
-	<input type="submit" value="Register">
+	<input type="submit" value="Login">
 </form>
 
