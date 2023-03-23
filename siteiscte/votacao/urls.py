@@ -21,4 +21,5 @@ path('<int:questao_id>/criaropcao', views.criaropcao, name='criaropcao'),
 path('<int:questao_id>/createoption', views.createoption, name='createoption'),
 # votacao/registar
 path('registar', views.registar, name='registar'),
+
 ]

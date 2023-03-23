@@ -6,3 +6,17 @@
 <p><strong>{{ error_message }}</strong></p>
 {% endif %}
 
+<form action="{% url 'votacao:registar' %}" method="post">
+    {% csrf_token %}
+    <label for="username">Introduza o seu nome:</label>
+    <input type="text" id="username" name="username"><br><br>
+    <label for="password">Introduza a sua password:</label>
+    <input type="text" id="password" name="password"><br><br>
+    <label for="username">Introduza o seu email:</label>
+    <input type="text" id="email" name="email"><br><br>
+    <label for="password">Introduza a seu curso:</label>
+    <input type="text" id="curso" name="curso"><br><br>
+
+	<input type="submit" value="Login">
+</form>
+

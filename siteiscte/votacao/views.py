@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.utils import timezone
 from django.template import RequestContext
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
 
 
 from .models import Questao, Opcao
@@ -64,16 +65,24 @@ def createoption(request, questao_id):
     o.save()
     return render(request, 'votacao/criaropcao.html', {'questao': questao, 'error_message': "Nova opção criada"})
 
-def registar(request):
-    return render(request, 'votacao/registar.html')
 
-def register(request):
-    username = request.POST['username']
-    password = request.POST['password']
-    user = authenticate(username=username,
-                        password=password)
-    if user is not None:
-        login(request, user)
-        return render(request, 'votacao/index.html')
-    else:
-        return render(request, 'votacao/registar.html', {'error_message': "Erro ao entrar na sua conta"})
+
+def registar(request):
+ if request.method == 'POST':
+     username = request.POST['username']
+     password = request.POST['password']
+     email = request.POST['email']
+     curso = request.POST['curso']
+     User.objects.create_user(username, password, email, curso)
+     user = authenticate(username=username,
+                         password=password,
+                         email=email,
+                         curso=curso)
+     if user is not None:
+         login(request, user)
+         return render(request, 'votacao/index.html')
+     else:
+         return render(request, 'votacao/registar.html', {'error_message': "Erro ao criar a sua conta", })
+ else:
+    # se a invocação não veio do form, isto é, o 1º passo
+    return render(request, 'votacao/registar.html')
