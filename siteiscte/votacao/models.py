@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils import timezone
 from six import string_types
+from django.contrib.auth.models import User
+
 import datetime
 
 class Questao(models.Model):
@@ -20,3 +22,12 @@ class Opcao(models.Model):
 
     def __str__(self):
         return self.opcao_texto
+
+
+'''
+class Aluno(models.model):
+    user=models.OneToOneField(User,on_delete=models.CASCADE)
+
+    email=models.CharField(max_length=100)
+    curso=models.CharField(max_length=100)
+'''

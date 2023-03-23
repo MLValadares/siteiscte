@@ -4,6 +4,8 @@ from django.template import loader
 from django.urls import reverse
 from django.utils import timezone
 from django.template import RequestContext
+from django.contrib.auth import authenticate, login
+
 
 from .models import Questao, Opcao
 
@@ -61,3 +63,17 @@ def createoption(request, questao_id):
     o = Opcao(opcao_texto=request.POST['opcaotexto'],votos=0,questao=questao)
     o.save()
     return render(request, 'votacao/criaropcao.html', {'questao': questao, 'error_message': "Nova opção criada"})
+
+def registar(request):
+    return render(request, 'votacao/registar.html')
+
+def register(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    user = authenticate(username=username,
+                        password=password)
+    if user is not None:
+        login(request, user)
+        return render(request, 'votacao/index.html')
+    else:
+        return render(request, 'votacao/registar.html', {'error_message': "Erro ao entrar na sua conta"})
