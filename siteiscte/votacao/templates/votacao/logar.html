@@ -21,7 +21,7 @@
 <br>
 {% if request.user.is_authenticated %}
 <p>O {{request.user.username}} está logado</p>
-<a href="{% url 'votacao:logout' %}">Logout</a>
+<a href="{% url 'votacao:logout_view' %}">Logout</a>
 {% else %}
 <p>O utilizador não está logado</p>
 {% endif %}

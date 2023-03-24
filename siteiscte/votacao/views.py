@@ -4,7 +4,7 @@ from django.template import loader
 from django.urls import reverse
 from django.utils import timezone
 from django.template import RequestContext
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 
 from .models import Questao, Opcao, Aluno
@@ -94,6 +94,6 @@ def registar(request):
         # se a invocação não veio do form, isto é, o 1º passo
         return render(request, 'votacao/registar.html')
 
-def logout(request):
+def logout_view(request):
     logout(request)
-    return render(request, 'votacao/index.html')
+    return HttpResponseRedirect(reverse('votacao:index'))

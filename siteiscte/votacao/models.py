@@ -26,7 +26,5 @@ class Opcao(models.Model):
 
 class Aluno(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE)
-
-
     curso=models.CharField(max_length=100)
     votos = models.IntegerField(default=0)
