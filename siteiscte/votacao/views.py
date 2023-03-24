@@ -8,7 +8,8 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 
 
-from .models import Questao, Opcao
+from .models import Questao, Opcao, Aluno
+
 
 def index(request):
     latest_question_list =Questao.objects.order_by('-pub_data')[:5]
