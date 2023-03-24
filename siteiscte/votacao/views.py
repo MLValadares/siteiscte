@@ -101,3 +101,6 @@ def registar(request):
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect(reverse('votacao:index'))
+
+def user_view(request):
+    return render(request, 'votacao/user_view.html')
