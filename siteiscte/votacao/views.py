@@ -79,7 +79,7 @@ def logar(request):
             return render(request, 'votacao/registar.html', {'error_message': "Erro ao criar a sua conta", })
     else:
         # se a invocação não veio do form, isto é, o 1º passo
-        return render(request, 'votacao/registar.html')
+        return render(request, 'votacao/logar.html')
 
 
 
