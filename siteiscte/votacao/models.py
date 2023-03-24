@@ -24,10 +24,8 @@ class Opcao(models.Model):
         return self.opcao_texto
 
 
-'''
-class Aluno(models.model):
+class Aluno(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE)
 
     email=models.CharField(max_length=100)
     curso=models.CharField(max_length=100)
-'''
