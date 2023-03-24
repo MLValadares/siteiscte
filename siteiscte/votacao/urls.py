@@ -15,6 +15,8 @@ path('<int:questao_id>/voto', views.voto, name='voto'),
 path('criarvotacao', views.criarquestao, name='criarquestao'),
 # votacao/createquestion
 path('createquestion', views.createquestion, name='createquestion'),
+# votacao/5/removequestion
+path('<int:questao_id>/remove_question', views.remove_question, name='remove_question'),
 # votacao/1/criaropcao
 path('<int:questao_id>/criaropcao', views.criaropcao, name='criaropcao'),
 # votacao/1/createoption

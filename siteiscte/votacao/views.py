@@ -50,7 +50,14 @@ def createquestion(request):
         return render(request, 'votacao/criarquestao.html',{'error_message': "Não introduziu um texto", })
     q = Questao(questao_texto=request.POST['questaotexto'],pub_data=timezone.now())
     q.save()
-    return render(request, 'votacao/criarquestao.html', {'error_message': "Nova pergunta criada", })
+    return render(request, 'votacao/criarquestao.html', {'error_message': "Nova pergunta criada"})
+
+def remove_question(request, questao_id):
+    questao = get_object_or_404(Questao, pk=questao_id)
+    questao.delete()
+    # falta por messagem de erro a dizer com sucesso
+    # {'error_message': "Pergunta apagada com sucesso"}
+    return HttpResponseRedirect(reverse('votacao:index'))
 
 def criaropcao(request, questao_id):
     questao = get_object_or_404(Questao, pk=questao_id)
@@ -64,6 +71,8 @@ def createoption(request, questao_id):
     o.save()
     return render(request, 'votacao/criaropcao.html', {'questao': questao, 'error_message': "Nova opção criada"})
 
+# def remove_option(request, opcao_id):
+#     return HttpResponseRedirect(reverse('votacao:index'))
 
 def logar(request):
     if request.method == 'POST':
