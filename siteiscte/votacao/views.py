@@ -89,7 +89,11 @@ def registar(request):
         u = User.objects.create_user(username,email, password)
         a = Aluno(user = u, curso = curso)
         a.save()
-        return render(request, 'votacao/registar.html', {'error_message': "User registado com sucesso", })
+        if a is not None:
+            return render(request, 'votacao/registar.html', {'error_message': "User registado com sucesso", })
+        else:
+            return render(request, 'votacao/registar.html', {'error_message': "User não foi registado com sucesso por favor tente novamente", })
+
     else:
         # se a invocação não veio do form, isto é, o 1º passo
         return render(request, 'votacao/registar.html')
