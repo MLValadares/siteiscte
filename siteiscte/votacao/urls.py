@@ -23,5 +23,6 @@ path('<int:questao_id>/createoption', views.createoption, name='createoption'),
 path('logar', views.logar, name='logar'),
 # votacao/registar
 path('registar', views.registar, name='registar'),
-
+# votacao/logout
+path('logout', views.logout, name="logout")
 ]

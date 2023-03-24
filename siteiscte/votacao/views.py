@@ -7,9 +7,7 @@ from django.template import RequestContext
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 
-
 from .models import Questao, Opcao, Aluno
-
 
 def index(request):
     latest_question_list =Questao.objects.order_by('-pub_data')[:5]
@@ -75,26 +73,26 @@ def logar(request):
                             password=password)
         if user is not None:
             login(request, user)
-            return render(request, 'votacao/index.html')
+            return render(request, 'votacao/logar.html', {'error_message': "Logado com sucesso", })
         else:
-            return render(request, 'votacao/registar.html', {'error_message': "Erro ao criar a sua conta", })
+            return render(request, 'votacao/logar.html', {'error_message': "Erro ao criar a sua conta", })
     else:
         # se a invocação não veio do form, isto é, o 1º passo
         return render(request, 'votacao/logar.html')
 
-
-
-
 def registar(request):
- if request.method == 'POST':
-    username = request.POST['username']
-    password = request.POST['password']
-    email = request.POST['email']
-    curso = request.POST['curso']
-    u = User.objects.create_user(username, password)
-    a = Aluno(user = u, email = email, curso = curso)
-    return render(request, 'votacao/registar.html', {'error_message': "User registado com sucesso", })
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        email = request.POST['email']
+        curso = request.POST['curso']
+        u = User.objects.create_user(username, password)
+        a = Aluno(user = u, email = email, curso = curso)
+        return render(request, 'votacao/registar.html', {'error_message': "User registado com sucesso", })
+    else:
+        # se a invocação não veio do form, isto é, o 1º passo
+        return render(request, 'votacao/registar.html')
 
- else:
-    # se a invocação não veio do form, isto é, o 1º passo
-    return render(request, 'votacao/registar.html')
+def logout(request):
+    logout(request)
+    return render(request, 'votacao/index.html')

@@ -14,3 +14,11 @@
 <a href="{% url 'votacao:criarquestao' %}">Criar nova Questão</a>
 <br>
 <a href="{% url 'votacao:logar' %}">Login</a>
+<br>
+<a href="{% url 'votacao:logout' %}">Logout</a>
+<br><br>
+{% if request.user.is_authenticated %}
+<p>O {{request.user.username}} está logado</p>
+{% else %}
+<p>O utilizador não está logado</p>
+{% endif %}
