@@ -27,6 +27,6 @@ class Opcao(models.Model):
 class Aluno(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE)
 
-    email=models.CharField(max_length=100)
+
     curso=models.CharField(max_length=100)
     votos = models.IntegerField(default=0)
