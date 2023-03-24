@@ -26,8 +26,6 @@ div.fixed {
     <p>Nao ha questoes disponiveis.</p>
     {% endif %}
     <a href="{% url 'votacao:criarquestao' %}">Criar nova Questão</a>
-    <br>
-    <a href="{% url 'votacao:logar' %}">Login</a>
     <br><br>
         <div class="fixed">
         {% if request.user.is_authenticated %}
@@ -35,6 +33,7 @@ div.fixed {
         <a href="{% url 'votacao:logout_view' %}">Logout</a>
         {% else %}
         <p>O utilizador não está logado</p>
+            <a href="{% url 'votacao:logar' %}">Login</a>
         {% endif %}
     </div>
 </body>
