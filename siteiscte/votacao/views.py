@@ -86,20 +86,14 @@ def logar(request):
 
 def registar(request):
  if request.method == 'POST':
-     username = request.POST['username']
-     password = request.POST['password']
-     email = request.POST['email']
-     curso = request.POST['curso']
-     User.objects.create_user(username, password, email, curso)
-     user = authenticate(username=username,
-                         password=password,
-                         email=email,
-                         curso=curso)
-     if user is not None:
-         login(request, user)
-         return render(request, 'votacao/index.html')
-     else:
-         return render(request, 'votacao/registar.html', {'error_message': "Erro ao criar a sua conta", })
+    username = request.POST['username']
+    password = request.POST['password']
+    email = request.POST['email']
+    curso = request.POST['curso']
+    u = User.objects.create_user(username, password)
+    a = Aluno(user = u, email = email, curso = curso)
+    return render(request, 'votacao/registar.html', {'error_message': "User registado com sucesso", })
+
  else:
     # se a invocação não veio do form, isto é, o 1º passo
     return render(request, 'votacao/registar.html')
