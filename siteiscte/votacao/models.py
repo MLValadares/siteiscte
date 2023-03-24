@@ -29,3 +29,4 @@ class Aluno(models.Model):
 
     email=models.CharField(max_length=100)
     curso=models.CharField(max_length=100)
+    votos = models.IntegerField(default=0)

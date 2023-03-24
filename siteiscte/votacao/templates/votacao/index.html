@@ -1,24 +1,43 @@
-{% if latest_question_list %}
-<ul>
-    {% for questao in latest_question_list %}
-    <li>
-        <a href="{% url 'votacao:detalhe' questao.id %}">
-            {{ questao.questao_texto }}
-        </a>
-    </li>
-    {% endfor %}
-</ul>
-{% else %}
-<p>Nao ha questoes disponiveis.</p>
-{% endif %}
-<a href="{% url 'votacao:criarquestao' %}">Criar nova Questão</a>
-<br>
-<a href="{% url 'votacao:logar' %}">Login</a>
-<br>
-<a href="{% url 'votacao:logout' %}">Logout</a>
-<br><br>
-{% if request.user.is_authenticated %}
-<p>O {{request.user.username}} está logado</p>
-{% else %}
-<p>O utilizador não está logado</p>
-{% endif %}
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+div.fixed {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 300px;
+  border: 1px;
+}
+</style>
+</head>
+<body>
+    {% if latest_question_list %}
+    <ul>
+        {% for questao in latest_question_list %}
+        <li>
+            <a href="{% url 'votacao:detalhe' questao.id %}">
+                {{ questao.questao_texto }}
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>Nao ha questoes disponiveis.</p>
+    {% endif %}
+    <a href="{% url 'votacao:criarquestao' %}">Criar nova Questão</a>
+    <br>
+    <a href="{% url 'votacao:logar' %}">Login</a>
+    <br>
+    <a href="{% url 'votacao:logout' %}">Logout</a>
+    <br><br>
+        <div class="fixed">
+        {% if request.user.is_authenticated %}
+        <p>O {{request.user.username}} está logado</p>
+        <a href="{% url 'votacao:logout' %}">Logout</a>
+        {% else %}
+        <p>O utilizador não está logado</p>
+        {% endif %}
+    </div>
+</body>
+</html>
