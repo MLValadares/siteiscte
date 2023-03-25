@@ -6,7 +6,7 @@
     {% if request.user.is_superuser %}
         <p>Super user</p>
     {% else %}
-        <p>Aluno de {{request.user.aluno.curso}}</p>
+        <p>Aluno do curso: {{request.user.aluno.curso}}</p>
         <p>Número total de votos realizados: {{request.user.aluno.votos}}</p>
     {% endif %}
 {% else %}
