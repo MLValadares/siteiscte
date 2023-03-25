@@ -1,0 +1,4 @@
+users:
+admin/admin
+Miguel Valadares/abc
+Edgar Quintino/def
