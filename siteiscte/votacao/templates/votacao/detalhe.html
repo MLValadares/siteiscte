@@ -16,4 +16,7 @@
 <form action="{% url 'votacao:criaropcao' questao.id %}">
     <input type="submit" value="Criar nova Opção" />
 </form>
+<form action="{% url 'votacao:remove_question' questao.id %}">
+    <input type="submit" value="Remover Questão" />
+</form>
 <a href="{% url 'votacao:index' %}">Index</a>

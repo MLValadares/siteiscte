@@ -3,15 +3,17 @@
 <head>
 <style>
 div.fixed {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 300px;
-  border: 1px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 300px;
 }
 </style>
 </head>
 <body>
+    {% if error_message %}
+        <p><strong>{{ error_message }}</strong></p>
+    {% endif %}
     {% if latest_question_list %}
     <ul>
         {% for questao in latest_question_list %}
@@ -29,10 +31,13 @@ div.fixed {
     <br><br>
         <div class="fixed">
         {% if request.user.is_authenticated %}
-        <p>O {{request.user.username}} está logado</p>
-        <a href="{% url 'votacao:logout_view' %}">Logout</a>
+            <p>{{request.user.username}}</p>
+            <p>Número total de votos realizados: {{request.user.aluno.votos}}</p>
+            <a href="{% url 'votacao:logout_view' %}">Logout</a>
+            <br><br>
+            <a href="{% url 'votacao:user_view' %}">Ver conta</a>
         {% else %}
-        <p>O utilizador não está logado</p>
+            <p>Utilizador Anónimo</p>
             <a href="{% url 'votacao:logar' %}">Login</a>
         {% endif %}
     </div>
