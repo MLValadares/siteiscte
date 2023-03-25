@@ -37,7 +37,6 @@ def voto(request, questao_id):
             # Apresenta de novo o form para votar
             return render(request, 'votacao/detalhe.html', {'questao': questao,'error_message': "Não escolheu uma opção",})
         else:
-            aluno = get_object_or_404(Aluno, pk=request.user.aluno.pk)
             if not request.user.is_superuser:
                 if request.user.aluno.votos >= limite_votos:
                     return render(request, 'votacao/detalhe.html', {'questao': questao,'error_message': "Limite de votos atingido"})
