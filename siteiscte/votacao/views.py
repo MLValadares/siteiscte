@@ -29,6 +29,8 @@ def resultados(request, questao_id):
 
 
 def voto(request, questao_id):
+    if not request.user.is_authenticated:
+        return Http404("O utilizador não está logado")
     if (request.POST['action']=="Voto"):
         questao = get_object_or_404(Questao, pk=questao_id)
         try:
@@ -53,6 +55,8 @@ def voto(request, questao_id):
         # voltar para a página web anterior.
         return HttpResponseRedirect(reverse('votacao:resultados',args=(questao.id,)))
     if (request.POST['action']=="Remover Opção selecionada"):
+        if not request.user.is_superuser:
+            return Http404("O utilizador não tem permissões")
         questao = get_object_or_404(Questao, pk=questao_id)
         try:
             o = questao.opcao_set.get(pk=request.POST['opcao'])
@@ -66,6 +70,11 @@ def criarquestao(request):
     return render(request, 'votacao/criarquestao.html')
 
 def createquestion(request):
+    if not request.user.is_authenticated:
+        return Http404("O utilizador não está logado")
+    else:
+        if not request.user.is_superuser:
+            return Http404("O utilizador não tem permissões")
     if request.POST['questaotexto']=="":
         return render(request, 'votacao/criarquestao.html',{'error_message': "Não introduziu um texto", })
     q = Questao(questao_texto=request.POST['questaotexto'],pub_data=timezone.now())
@@ -73,10 +82,13 @@ def createquestion(request):
     return render(request, 'votacao/criarquestao.html', {'error_message': "Nova pergunta criada"})
 
 def remove_question(request, questao_id):
+    if not request.user.is_authenticated:
+        return Http404("O utilizador não está logado")
+    else:
+        if not request.user.is_superuser:
+            return Http404("O utilizador não tem permissões")
     questao = get_object_or_404(Questao, pk=questao_id)
     questao.delete()
-    # falta por messagem de erro a dizer com sucesso
-    # {'error_message': "Pergunta apagada com sucesso"}
     return HttpResponseRedirect(reverse('votacao:index'))
 
 def criaropcao(request, questao_id):
@@ -84,20 +96,17 @@ def criaropcao(request, questao_id):
     return render(request, 'votacao/criaropcao.html', {'questao': questao})
 
 def createoption(request, questao_id):
+    if not request.user.is_authenticated:
+        return Http404("O utilizador não está logado")
+    else:
+        if not request.user.is_superuser:
+            return Http404("O utilizador não tem permissões")
     questao = get_object_or_404(Questao, pk=questao_id)
     if request.POST['opcaotexto'] == "":
         return render(request, 'votacao/criaropcao.html', {'questao': questao,'error_message': "Não introduziu um texto", })
     o = Opcao(opcao_texto=request.POST['opcaotexto'],votos=0,questao=questao)
     o.save()
     return render(request, 'votacao/criaropcao.html', {'questao': questao, 'error_message': "Nova opção criada"})
-'''
- def remove_option(request, opcao_id):
-    o = get_object_or_404(Opcao, pk=opcao_id)
-    if request.POST['opcaotexto']=="":
-        return render(request, 'votacao/detalhe.html', {'error_message': "Não introduziu um texto", })
-    else:
-        o.delete()
-        return HttpResponseRedirect(reverse('votacao:detalhe'))'''
 
 def logar(request):
     if request.method == 'POST':
