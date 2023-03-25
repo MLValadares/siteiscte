@@ -26,21 +26,32 @@ def resultados(request, questao_id):
 
 
 def voto(request, questao_id):
-    questao = get_object_or_404(Questao, pk=questao_id)
-    try:
-        opcao_seleccionada = questao.opcao_set.get(pk=request.POST['opcao'])
-    except (KeyError, Opcao.DoesNotExist):
-        # Apresenta de novo o form para votar
-        return render(request, 'votacao/detalhe.html', {'questao': questao,'error_message': "Não escolheu uma opção",})
-    else:
-        opcao_seleccionada.votos += 1
-        opcao_seleccionada.save()
-    # Retorne sempre HttpResponseRedirect depois de
-    # tratar os dados POST de um form
-    # pois isso impede os dados de serem tratados
-    # repetidamente se o utilizador
-    # voltar para a página web anterior.
-    return HttpResponseRedirect(reverse('votacao:resultados',args=(questao.id,)))
+    if (request.POST['action']=="Voto"):
+
+        questao = get_object_or_404(Questao, pk=questao_id)
+        try:
+            opcao_seleccionada = questao.opcao_set.get(pk=request.POST['opcao'])
+        except (KeyError, Opcao.DoesNotExist):
+            # Apresenta de novo o form para votar
+            return render(request, 'votacao/detalhe.html', {'questao': questao,'error_message': "Não escolheu uma opção",})
+        else:
+            opcao_seleccionada.votos += 1
+            opcao_seleccionada.save()
+        # Retorne sempre HttpResponseRedirect depois de
+        # tratar os dados POST de um form
+        # pois isso impede os dados de serem tratados
+        # repetidamente se o utilizador
+        # voltar para a página web anterior.
+        return HttpResponseRedirect(reverse('votacao:resultados',args=(questao.id,)))
+    if (request.POST['action']=="Remover Opção selecionada"):
+        questao = get_object_or_404(Questao, pk=questao_id)
+        try:
+            o = questao.opcao_set.get(pk=request.POST['opcao'])
+        except (KeyError, Opcao.DoesNotExist):
+            # Apresenta de novo o form para votar
+            return render(request, 'votacao/detalhe.html', {'questao': questao,'error_message': "Não escolheu uma opção",})
+        o.delete()
+        return HttpResponseRedirect(reverse('votacao:detalhe',args=(questao.id,)))
 
 def criarquestao(request):
     return render(request, 'votacao/criarquestao.html')
@@ -70,9 +81,14 @@ def createoption(request, questao_id):
     o = Opcao(opcao_texto=request.POST['opcaotexto'],votos=0,questao=questao)
     o.save()
     return render(request, 'votacao/criaropcao.html', {'questao': questao, 'error_message': "Nova opção criada"})
-
-# def remove_option(request, opcao_id):
-#     return HttpResponseRedirect(reverse('votacao:index'))
+'''
+ def remove_option(request, opcao_id):
+    o = get_object_or_404(Opcao, pk=opcao_id)
+    if request.POST['opcaotexto']=="":
+        return render(request, 'votacao/detalhe.html', {'error_message': "Não introduziu um texto", })
+    else:
+        o.delete()
+        return HttpResponseRedirect(reverse('votacao:detalhe'))'''
 
 def logar(request):
     if request.method == 'POST':
@@ -84,7 +100,7 @@ def logar(request):
             login(request, user)
             return render(request, 'votacao/logar.html', {'error_message': "Logado com sucesso", })
         else:
-            return render(request, 'votacao/logar.html', {'error_message': "Erro ao criar a sua conta", })
+            return render(request, 'votacao/logar.html', {'error_message': "Erro ao logar na sua conta", })
     else:
         # se a invocação não veio do form, isto é, o 1º passo
         return render(request, 'votacao/logar.html')

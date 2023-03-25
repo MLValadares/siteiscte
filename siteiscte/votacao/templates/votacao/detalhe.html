@@ -11,7 +11,8 @@
         </label>
         <br />
     {% endfor %}
-    <input type="submit" value="Voto" />
+    <input type="submit" name="action" value="Voto" />
+    <input type="submit" name="action" value="Remover Opção selecionada" />
 </form>
 <form action="{% url 'votacao:criaropcao' questao.id %}">
     <input type="submit" value="Criar nova Opção" />
@@ -19,4 +20,5 @@
 <form action="{% url 'votacao:remove_question' questao.id %}">
     <input type="submit" value="Remover Questão" />
 </form>
+
 <a href="{% url 'votacao:index' %}">Index</a>
