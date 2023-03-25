@@ -9,6 +9,9 @@ from django.contrib.auth.models import User
 
 from .models import Questao, Opcao, Aluno
 
+# Feito por Grupo LEI-3
+limite_votos=13
+
 def index(request):
     latest_question_list =Questao.objects.order_by('-pub_data')[:5]
     context = {'latest_question_list': latest_question_list}
@@ -27,7 +30,6 @@ def resultados(request, questao_id):
 
 def voto(request, questao_id):
     if (request.POST['action']=="Voto"):
-
         questao = get_object_or_404(Questao, pk=questao_id)
         try:
             opcao_seleccionada = questao.opcao_set.get(pk=request.POST['opcao'])
@@ -35,6 +37,14 @@ def voto(request, questao_id):
             # Apresenta de novo o form para votar
             return render(request, 'votacao/detalhe.html', {'questao': questao,'error_message': "Não escolheu uma opção",})
         else:
+            aluno = get_object_or_404(Aluno, pk=request.user.aluno.pk)
+            if not request.user.is_superuser:
+                if request.user.aluno.votos >= limite_votos:
+                    return render(request, 'votacao/detalhe.html', {'questao': questao,'error_message': "Limite de votos atingido"})
+                else:
+                    aluno = get_object_or_404(Aluno, pk=request.user.aluno.pk)
+                    aluno.votos+=1
+                    aluno.save()
             opcao_seleccionada.votos += 1
             opcao_seleccionada.save()
         # Retorne sempre HttpResponseRedirect depois de
