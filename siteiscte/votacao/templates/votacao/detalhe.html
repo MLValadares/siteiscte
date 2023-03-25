@@ -11,14 +11,22 @@
         </label>
         <br />
     {% endfor %}
+
+    {% if request.user.is_authenticated %}
     <input type="submit" name="action" value="Voto" />
     <input type="submit" name="action" value="Remover Opção selecionada" />
+    {% endif %}
+
 </form>
+{% if request.user.is_authenticated %}
 <form action="{% url 'votacao:criaropcao' questao.id %}">
     <input type="submit" value="Criar nova Opção" />
 </form>
 <form action="{% url 'votacao:remove_question' questao.id %}">
     <input type="submit" value="Remover Questão" />
 </form>
+{% else %}
+<p><strong>Necessita de estar Logado para poder realizar votos e outros tipos de ações</strong></p>
+{% endif %}
 
 <a href="{% url 'votacao:index' %}">Index</a>
