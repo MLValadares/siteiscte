@@ -1,46 +1,86 @@
-
 {% load static %}
 <link rel="stylesheet" type="text/css"
-href="{% static 'votacao/style.css' %}" />
+      href="{% static 'votacao/style.css' %}"/>
 
-<header>
-    <p>olá</p>
-    <div class="fixed">
-    {% if request.user.is_authenticated %}
-    <p>{{request.user.username}}</p>
-    {% if not request.user.is_superuser %}
-    <p>Número total de votos realizados: {{request.user.aluno.votos}}</p>
-    {% endif %}
-    <a href="{% url 'votacao:logout_view' %}">Logout</a>
-    <br><br>
-    <a href="{% url 'votacao:user_view' %}">Ver conta</a>
-    {% else %}
-    <p>Utilizador Anónimo</p>
-    <a href="{% url 'votacao:logar' %}">Login</a>
-    {% endif %}
+<div class="grid-container">
+    <div class="header">
+        <h2>Header</h2>
+    </div>
+
+    <div class="left" style="background-color:#aaa;">ola</div>
+    <div class="middle" style="background-color:#bbb;">
+        {% if latest_question_list %}
+        <ul>
+            {% for questao in latest_question_list %}
+            <li>
+                <a href="{% url 'votacao:detalhe' questao.id %}">
+                    {{ questao.questao_texto }}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>Nao ha questoes disponiveis.</p>
+        {% endif %}
+        {% if request.user.is_superuser %}
+        <a href="{% url 'votacao:criarquestao' %}">Criar nova Questão</a>
+        {% endif %}
+        <br><br>
+    </div>
+    <div class="right" style="background-color:#ccc;">Column</div>
+
+    <div class="footer">
+        <p>Footer</p>
+    </div>
 </div>
-</header>
-<nav>
 
-</nav>
-{% if error_message %}
-<p><strong>{{ error_message }}</strong></p>
-{% endif %}
 
-{% if latest_question_list %}
-<ul>
-    {% for questao in latest_question_list %}
-    <li>
-        <a href="{% url 'votacao:detalhe' questao.id %}">
-            {{ questao.questao_texto }}
-        </a>
-    </li>
-    {% endfor %}
-</ul>
-{% else %}
-<p>Nao ha questoes disponiveis.</p>
-{% endif %}
-{% if request.user.is_superuser %}
-<a href="{% url 'votacao:criarquestao' %}">Criar nova Questão</a>
-{% endif %}
-<br><br>
+
+
+<!--{% load static %}-->
+<!--<link rel="stylesheet" type="text/css"-->
+<!--      href="{% static 'votacao/style.css' %}"/>-->
+
+<!--<div class="grid-container">-->
+<!--    <div class="header" style="background-color:rgba(234,4,4,0.73);">a</div>-->
+<!--&lt;!&ndash;    <div class="nav" style="background-color:rgba(222,212,9,0.85);">&ndash;&gt;-->
+<!--        {% if error_message %}-->
+<!--        <p><strong>{{ error_message }}</strong></p>-->
+<!--        {% endif %}-->
+<!--    </div>-->
+<!--    <div class="left" style="background-color:#00bdff;">ola</div>-->
+<!--    <div class="midle" style="background-color:rgba(0,189,255,0.34);">-->
+<!--        {% if latest_question_list %}-->
+<!--        <ul>-->
+<!--            {% for questao in latest_question_list %}-->
+<!--            <li>-->
+<!--                <a href="{% url 'votacao:detalhe' questao.id %}">-->
+<!--                    {{ questao.questao_texto }}-->
+<!--                </a>-->
+<!--            </li>-->
+<!--            {% endfor %}-->
+<!--        </ul>-->
+<!--        {% else %}-->
+<!--        <p>Nao ha questoes disponiveis.</p>-->
+<!--        {% endif %}-->
+<!--        {% if request.user.is_superuser %}-->
+<!--        <a href="{% url 'votacao:criarquestao' %}">Criar nova Questão</a>-->
+<!--        {% endif %}-->
+<!--        <br><br></div>-->
+<!--    <div class="right" style="background-color:#ffffff;">ola</div>-->
+<!--    <div class="footer" style="background-color:#ccc;">footer</div>-->
+<!--</div>-->
+<!--<div class="fixed">-->
+<!--    {% if request.user.is_authenticated %}-->
+<!--    <p>{{request.user.username}}</p>-->
+<!--    {% if not request.user.is_superuser %}-->
+<!--    <p>Número total de votos realizados: {{request.user.aluno.votos}}</p>-->
+<!--    {% endif %}-->
+<!--    <a href="{% url 'votacao:logout_view' %}">Logout</a>-->
+<!--    <br><br>-->
+<!--    <a href="{% url 'votacao:user_view' %}">Ver conta</a>-->
+<!--    {% else %}-->
+<!--    <p>Utilizador Anónimo</p>-->
+<!--    <a href="{% url 'votacao:logar' %}">Login</a>-->
+<!--    {% endif %}-->
+<!--</div>-->
