@@ -11,10 +11,17 @@ body {
   text-align: center;
   font-size: 35px;
 }
+.nav {
+    grid-area: nav;
+    padding: 10px;
+    text-align: center;
+    background-color: #f60404;
+}
 .grid-container {
   display: grid;
   grid-template-areas:
     'header header header header header header'
+    'nav nav nav nav nav nav'
     'left middle middle middle middle right'
     'footer footer footer footer footer footer';
 }
