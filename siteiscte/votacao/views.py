@@ -9,6 +9,9 @@ from django.contrib.auth.models import User
 
 from .models import Questao, Opcao, Aluno
 
+from django.shortcuts import render
+from django.conf import settings
+from django.core.files.storage import FileSystemStorage
 # Feito por Grupo LEI-3
 limite_votos=13
 
@@ -147,3 +150,12 @@ def logout_view(request):
 
 def user_view(request):
     return render(request, 'votacao/user_view.html')
+
+def fazer_upload(request):
+    if request.method == 'POST' and request.FILES['myfile']:
+        myfile = request.FILES['myfile']
+        fs = FileSystemStorage()
+        filename = fs.save(myfile.name, myfile)
+        uploaded_file_url = fs.url(filename)
+        return render(request, 'votacao/fazer_upload.html', {'uploaded_file_url': uploaded_file_url})
+    return render(request, 'votacao/fazer_upload.html')

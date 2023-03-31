@@ -28,5 +28,8 @@ path('registar', views.registar, name='registar'),
 # votacao/logout_view
 path('logout_view', views.logout_view, name="logout_view"),
 # votacao/user_view
-path('user_view', views.user_view, name="user_view")
+path('user_view', views.user_view, name="user_view"),
+
+path('fazer_upload', views.fazer_upload, name='fazer_upload'),
+
 ]
