@@ -52,3 +52,20 @@ article.login {
     right: 0;
     width: 300px;
 }
+
+/*a{*/
+/*  color: blue;*/
+/*}*/
+
+a.butao:link, a:visited {
+  background-color: rgb(0, 189, 255);
+  color: white;
+  padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+a.butao:hover, a:active {
+  background-color: rgba(0, 183, 255, 0.51);
+}
