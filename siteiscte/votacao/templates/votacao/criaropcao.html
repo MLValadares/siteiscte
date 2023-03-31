@@ -1,3 +1,5 @@
+{% extends "votacao/index.html" %}
+{% block conteudo %}
 <h1>{{ questao.questao_texto }}</h1>
 {% if error_message %}
 <p><strong>{{ error_message }}</strong></p>
@@ -8,5 +10,8 @@
     <input type="text" id="opcaotexto" name="opcaotexto"><br><br>
     <input type="submit" value="Gravar nova Opção">
 </form>
+{% endblock %}
+{% block opcoes_e_controlos %}
 <a href="{% url 'votacao:detalhe' questao.id %}">Voltar</a><br>
 <a href="{% url 'votacao:index' %}">Index</a>
+{% endblock %}

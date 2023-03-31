@@ -1,8 +1,13 @@
+{% extends "votacao/index.html" %}
+{% block conteudo %}
 <h1>{{ questao.questao_texto }}</h1>
 <ul>
 {% for opcao in questao.opcao_set.all %}
     <li>{{ opcao.opcao_texto }} -- {{ opcao.votos }} voto{{ opcao.votos|pluralize }}</li>
 {% endfor %}
 </ul>
+{% endblock %}
+{% block opcoes_e_controlos %}
 <a href="{% url 'votacao:detalhe' questao.id %}">Votar novamente?</a>
 <a href="{% url 'votacao:index' %}">Index</a>
+{% endblock %}

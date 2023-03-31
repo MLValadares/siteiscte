@@ -1,3 +1,5 @@
+{% extends "votacao/index.html" %}
+{% block conteudo %}
 {% if error_message %}
 <p><strong>{{ error_message }}</strong></p>
 {% endif %}
@@ -7,4 +9,7 @@
     <input type="text" id="questaotexto" name="questaotexto"><br><br>
     <input type="submit" value="Gravar nova Questão">
 </form>
+{% endblock %}
+{% block opcoes_e_controlos %}
 <a href="{% url 'votacao:index' %}">Index</a>
+{% endblock %}

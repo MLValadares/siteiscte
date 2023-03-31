@@ -1,7 +1,8 @@
-<header style="text-align:center;">
-
-		<h1>LEI - Question Simulator - Login</h1>
-</header>
+<!--<header style="text-align:center;">-->
+<!--		<h1>LEI - Question Simulator - Login</h1>-->
+<!--</header>-->
+{% extends "votacao/index.html" %}
+{% block conteudo %}
 {% if error_message %}
 <p><strong>{{ error_message }}</strong></p>
 {% endif %}
@@ -20,9 +21,12 @@
 
 	<input type="submit" value="Login">
 </form>
+
 <a href="{% url 'votacao:registar' %}">Registar</a>
 <br>
 {% endif %}
+{% endblock %}
+{% block opcoes_e_controlos %}
 <a href="{% url 'votacao:index' %}">Index</a>
 <br>
-
+{% endblock %}
