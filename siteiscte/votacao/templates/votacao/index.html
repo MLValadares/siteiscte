@@ -12,24 +12,25 @@
 
     <section class="left" style="background-color:#aaa;"></section>
     <section class="middle" style="background-color:#bbb;">
-        {% block content %}
-        {% if latest_question_list %}
-        <ul>
-            {% for questao in latest_question_list %}
-            <li>
-                <a href="{% url 'votacao:detalhe' questao.id %}">
-                    {{ questao.questao_texto }}
-                </a>
-            </li>
-            {% endfor %}
-        </ul>
-        {% else %}
-        <p>Nao ha questoes disponiveis.</p>
-        {% endif %}
-        {% if request.user.is_superuser %}
-        <a class="butao" href="{% url 'votacao:criarquestao' %}">Criar nova Questão</a>
-        {% endif %}
-        <br><br>
+        {% block conteudo %}
+            {% if latest_question_list %}
+            <ul>
+                {% for questao in latest_question_list %}
+                <li>
+                    <a href="{% url 'votacao:detalhe' questao.id %}">
+                        {{ questao.questao_texto }}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>Nao ha questoes disponiveis.</p>
+            {% endif %}
+        {% endblock %}
+        {% block opcoes_e_controlos %}
+            {% if request.user.is_superuser %}
+            <a class="butao" href="{% url 'votacao:criarquestao' %}">Criar nova Questão</a>
+            {% endif %}
         {% endblock %}
     </section>
     <section class="right" style="background-color:#ccc;"></section>
