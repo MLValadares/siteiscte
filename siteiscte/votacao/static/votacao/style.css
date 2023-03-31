@@ -3,7 +3,7 @@
 }
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background: white url("images/edificio_1_patio.jpg");
+    background: white url("../images/edificio_1_patio.jpg");
 }
 header {
   grid-area: header;
@@ -12,11 +12,9 @@ header {
   text-align: center;
   font-size: 35px;
   border: 2px solid black;
-  background-image: url("../votacao/images/head.jpg");
+  background-image: url("../images/header-background.png");
+  background-size: 100% 100%;
   background-repeat: no-repeat;
-  background-size: cover;
-
-
 }
 
 nav {
