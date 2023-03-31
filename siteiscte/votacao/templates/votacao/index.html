@@ -41,6 +41,7 @@
 <article class="login">
     {% if request.user.is_authenticated %}
     <p>{{request.user.username}}</p>
+<!--    <img src="{% static 'media/troll.png' %}" >-->
     {% if not request.user.is_superuser %}
     <p>Número total de votos realizados: {{request.user.aluno.votos}}</p>
     {% endif %}
