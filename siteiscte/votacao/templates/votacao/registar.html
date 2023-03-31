@@ -1,11 +1,12 @@
-<header style="text-align:center;">
+<!--<header style="text-align:center;">-->
 
-		<h1>LEI - Question Simulator - Register</h1>
-</header>
+<!--		<h1>LEI - Question Simulator - Register</h1>-->
+<!--</header>-->
+{% extends "votacao/index.html" %}
+{% block conteudo %}
 {% if error_message %}
 <p><strong>{{ error_message }}</strong></p>
 {% endif %}
-
 <form action="{% url 'votacao:registar' %}" method="post">
     {% csrf_token %}
     <label for="username">Introduza o seu nome:</label>
@@ -19,5 +20,7 @@
 
 	<input type="submit" value="Register">
 </form>
-
+{% endblock %}
+{% block opcoes_e_controlos %}
 <a href="{% url 'votacao:logar' %}">Login</a>
+{% endblock %}

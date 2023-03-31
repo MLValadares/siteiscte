@@ -1,4 +1,7 @@
-<h1>LEI - Question Simulator - Login</h1>
+<!--<h1>LEI - Question Simulator - Login</h1>-->
+
+{% extends "votacao/index.html" %}
+{% block conteudo %}
 <h2>Detalhes de conta</h2>
 {% if request.user.is_authenticated %}
     <p>Username: {{request.user.username}}</p>
@@ -13,4 +16,7 @@
     <p>O utilizador não está logado</p>
     <a href="{% url 'votacao:logar' %}">Login</a><br><br>
 {% endif %}
+{% endblock %}
+{% block opcoes_e_controlos %}
 <a href="{% url 'votacao:index' %}">Index</a>
+{% endblock %}
