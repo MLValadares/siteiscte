@@ -1,3 +1,9 @@
+{% extends "votacao/index.html" %}
+{% block nav %}
+    <a class="butao" href="https://www.iscte-iul.pt/">Site ISCTE</a>
+    <a class="butao" href="{% url 'votacao:index' %}">Index</a>
+{% endblock %}
+{% block conteudo %}
 {% load static %}
     <form method="post" enctype="multipart/form-data" action="{% url 'votacao:fazer_upload' %}">
         {% csrf_token %}
@@ -9,6 +15,6 @@
     <a href="{{ uploaded_file_url }}"> {{ uploaded_file_url }} </a>
     </p>
     {% endif %}
-    <p>
-    <a href="{% url 'votacao:index' %}">Voltar ao início </a>
-    </p>
+{% endblock %}
+{% block opcoes_e_controlos %}
+{% endblock %}

@@ -1,4 +1,8 @@
 {% extends "votacao/index.html" %}
+{% block nav %}
+    <a class="butao" href="https://www.iscte-iul.pt/">Site ISCTE</a>
+    <a class="butao" href="{% url 'votacao:index' %}">Index</a>
+{% endblock %}
 {% block conteudo %}
 <h1>{{ questao.questao_texto }}</h1>
 <ul>
@@ -8,6 +12,5 @@
 </ul>
 {% endblock %}
 {% block opcoes_e_controlos %}
-<a href="{% url 'votacao:detalhe' questao.id %}">Votar novamente?</a>
-<a href="{% url 'votacao:index' %}">Index</a>
+<a class="butao" href="{% url 'votacao:detalhe' questao.id %}">Votar novamente?</a>
 {% endblock %}

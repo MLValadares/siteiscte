@@ -1,6 +1,10 @@
 <!--<h1>LEI - Question Simulator - Login</h1>-->
 
 {% extends "votacao/index.html" %}
+{% block nav %}
+    <a class="butao" href="https://www.iscte-iul.pt/">Site ISCTE</a>
+    <a class="butao" href="{% url 'votacao:index' %}">Index</a>
+{% endblock %}
 {% block conteudo %}
 <h2>Detalhes de conta</h2>
 {% if request.user.is_authenticated %}
@@ -19,5 +23,4 @@
 {% endif %}
 {% endblock %}
 {% block opcoes_e_controlos %}
-<a href="{% url 'votacao:index' %}">Index</a>
 {% endblock %}

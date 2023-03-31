@@ -1,4 +1,8 @@
 {% extends "votacao/index.html" %}
+{% block nav %}
+    <a class="butao" href="https://www.iscte-iul.pt/">Site ISCTE</a>
+    <a class="butao" href="{% url 'votacao:index' %}">Index</a>
+{% endblock %}
 {% block conteudo %}
 <h1>{{ questao.questao_texto }}</h1>
 {% if error_message %}
@@ -37,6 +41,4 @@
     {% endfor %}
     <p><strong>Necessita de estar Logado para poder realizar votos e outros tipos de ações</strong></p>
 {% endif %}
-
-<a href="{% url 'votacao:index' %}">Index</a>
 {% endblock %}

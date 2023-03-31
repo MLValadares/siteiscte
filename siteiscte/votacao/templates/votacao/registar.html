@@ -3,6 +3,11 @@
 <!--		<h1>LEI - Question Simulator - Register</h1>-->
 <!--</header>-->
 {% extends "votacao/index.html" %}
+{% block nav %}
+    <a class="butao" href="https://www.iscte-iul.pt/">Site ISCTE</a>
+    <a class="butao" href="{% url 'votacao:index' %}">Index</a>
+    <a class="butao" href="{% url 'votacao:logar' %}">Login</a>
+{% endblock %}
 {% block conteudo %}
 {% if error_message %}
 <p><strong>{{ error_message }}</strong></p>
@@ -22,5 +27,4 @@
 </form>
 {% endblock %}
 {% block opcoes_e_controlos %}
-<a href="{% url 'votacao:logar' %}">Login</a>
 {% endblock %}
