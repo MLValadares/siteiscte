@@ -6,15 +6,16 @@ body {
     background: white url("../images/edificio_1_patio.jpg");
 }
 header {
-  grid-area: header;
-  background-color: #f1f1f1;
-  padding: 30px;
-  text-align: center;
-  font-size: 35px;
-  border: 2px solid black;
-  background-image: url("../images/header-background.png");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
+    grid-area: header;
+     background-color: #f1f1f1;
+     padding: 30px;
+     text-align: center;
+    font-size: 35px;
+     border: 2px solid black;
+    background-image: url("../images/header-background.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    height: 250px;
 }
 
 nav {
@@ -58,13 +59,8 @@ article.login {
     right: 20px;
     width: 300px;
     border-style: solid;
+    font-size: 15px;
 }
-
-/*a{*/
-/*  color: blue;*/
-/*}*/
-
-
 
 a.butao:link, a:visited {
     background-color: rgb(0, 189, 255);

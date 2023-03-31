@@ -15,6 +15,8 @@ from django.core.files.storage import FileSystemStorage
 # Feito por Grupo LEI-3
 limite_votos=13
 
+from django.contrib.auth.decorators import login_required
+
 def index(request):
     latest_question_list =Questao.objects.order_by('-pub_data')[:5]
     context = {'latest_question_list': latest_question_list}
@@ -25,15 +27,13 @@ def detalhe(request, questao_id):
     questao = get_object_or_404(Questao, pk=questao_id)
     return render(request, 'votacao/detalhe.html',{'questao': questao})
 
-
+#autheticado
 def resultados(request, questao_id):
     questao = get_object_or_404(Questao, pk=questao_id)
     return render(request, 'votacao/resultados.html', {'questao': questao})
 
-
+@login_required(login_url='/votacao/logar')
 def voto(request, questao_id):
-    if not request.user.is_authenticated:
-        return Http404("O utilizador não está logado")
     if (request.POST['action']=="Voto"):
         questao = get_object_or_404(Questao, pk=questao_id)
         try:
@@ -57,6 +57,7 @@ def voto(request, questao_id):
         # repetidamente se o utilizador
         # voltar para a página web anterior.
         return HttpResponseRedirect(reverse('votacao:resultados',args=(questao.id,)))
+    # apenas admin
     if (request.POST['action']=="Remover Opção selecionada"):
         if not request.user.is_superuser:
             return Http404("O utilizador não tem permissões")
@@ -72,6 +73,7 @@ def voto(request, questao_id):
 def criarquestao(request):
     return render(request, 'votacao/criarquestao.html')
 
+#apenas admin
 def createquestion(request):
     if not request.user.is_authenticated:
         return Http404("O utilizador não está logado")
@@ -84,6 +86,7 @@ def createquestion(request):
     q.save()
     return render(request, 'votacao/criarquestao.html', {'error_message': "Nova pergunta criada"})
 
+#apenas admin
 def remove_question(request, questao_id):
     if not request.user.is_authenticated:
         return Http404("O utilizador não está logado")
@@ -98,6 +101,7 @@ def criaropcao(request, questao_id):
     questao = get_object_or_404(Questao, pk=questao_id)
     return render(request, 'votacao/criaropcao.html', {'questao': questao})
 
+#apenas admin
 def createoption(request, questao_id):
     if not request.user.is_authenticated:
         return Http404("O utilizador não está logado")
@@ -126,6 +130,7 @@ def logar(request):
         # se a invocação não veio do form, isto é, o 1º passo
         return render(request, 'votacao/logar.html')
 
+# não estar registado
 def registar(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -144,13 +149,16 @@ def registar(request):
         # se a invocação não veio do form, isto é, o 1º passo
         return render(request, 'votacao/registar.html')
 
+#autheticado
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect(reverse('votacao:index'))
 
+#autheticado
 def user_view(request):
     return render(request, 'votacao/user_view.html')
 
+#autheticado
 def fazer_upload(request):
     if request.method == 'POST' and request.FILES['myfile']:
         myfile = request.FILES['myfile']

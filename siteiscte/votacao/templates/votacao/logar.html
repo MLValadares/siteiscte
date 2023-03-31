@@ -5,18 +5,15 @@
 {% block nav %}
     <a class="butao" href="https://www.iscte-iul.pt/">Site ISCTE</a>
     <a class="butao" href="{% url 'votacao:index' %}">Index</a>
+    {% if not request.user.is_authenticated %}
     <a class="butao" href="{% url 'votacao:registar' %}">Registar</a>
+    {% endif %}
 {% endblock %}
 {% block conteudo %}
 {% if error_message %}
 <p><strong>{{ error_message }}</strong></p>
 {% endif %}
-{% if request.user.is_authenticated %}
-<a href="{% url 'votacao:logout_view' %}">Logout</a>
-<br>
-<a href="{% url 'votacao:user_view' %}">Ver conta</a>
-<br><br>
-{% else %}
+{% if not request.user.is_authenticated %}
 <form action="{% url 'votacao:logar' %}" method="post">
     {% csrf_token %}
     <label for="username">Introduza o seu nome:</label>
