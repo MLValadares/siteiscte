@@ -1,7 +1,11 @@
+{% extends "votacao/index.html" %}
+{% block conteudo %}
 <h1>{{ questao.questao_texto }}</h1>
 {% if error_message %}
 <p><strong>{{ error_message }}</strong></p>
 {% endif %}
+{% endblock %}
+{% block opcoes_e_controlos %}
 {% if request.user.is_authenticated %}
     <form action="{% url 'votacao:voto' questao.id %}" method="post">
         {% csrf_token %}
@@ -35,3 +39,4 @@
 {% endif %}
 
 <a href="{% url 'votacao:index' %}">Index</a>
+{% endblock %}
