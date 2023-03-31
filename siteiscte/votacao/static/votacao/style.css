@@ -2,7 +2,8 @@
   box-sizing: border-box;
 }
 body {
-  font-family: Arial, Helvetica, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
+    background: white url("images/edificio_1_patio.jpg");
 }
 header {
   grid-area: header;
@@ -22,7 +23,7 @@ nav {
     grid-area: nav;
     /*padding: 10px;*/
     text-align: center;
-    background-color: rgba(222, 212, 9, 0.85);
+    background-color: rgba(0, 189, 255, 0.33);
 }
 .grid-container {
   display: grid;
@@ -53,9 +54,30 @@ footer {
   text-align: center;
 }
 article.login {
-    background-color: rgba(0, 0, 0, 0);
+    background-color: rgb(255, 255, 255);
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 20px;
+    right: 20px;
     width: 300px;
+    border-style: solid;
+}
+
+/*a{*/
+/*  color: blue;*/
+/*}*/
+
+
+
+a.butao:link, a:visited {
+    background-color: rgb(0, 189, 255);
+    color: white;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+a.butao:hover, a:active {
+    background-color: rgba(0, 183, 255, 0.51);
+    color: white;
 }
