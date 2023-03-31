@@ -43,7 +43,7 @@ section.right {
 footer {
   grid-area: footer;
   background-color: #f1f1f1;
-  padding: 10px;
+  padding: 40px;
   text-align: center;
 }
 article.login {
