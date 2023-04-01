@@ -13,7 +13,7 @@
             <p>Número total de votos realizados: {{request.user.aluno.votos}}</p>
             {% endif %}
             <a class="butao" href="{% url 'votacao:logout_view' %}">Logout</a>
-            <br><br>
+
             <a class="butao" href="{% url 'votacao:user_view' %}">Ver conta</a>
             {% else %}
             <p>Utilizador Anónimo</p>
