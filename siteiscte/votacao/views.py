@@ -160,6 +160,7 @@ def user_view(request):
     return render(request, 'votacao/user_view.html')
 
 #autheticado
+# exister maneira de guardar file em BD (forms.FileField), no entanto, decidimos usar como aparece no pdf de ficheiros estaticos
 def fazer_upload(request):
     if request.method == 'POST' and request.FILES['myfile']:
         myfile = request.FILES['myfile']
