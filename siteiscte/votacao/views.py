@@ -137,8 +137,6 @@ def logar(request):
         # se a invocação não veio do form, isto é, o 1º passo
         return render(request, 'votacao/logar.html')
 
-# não estar registado
-@user_passes_test(lambda u: u is None)
 def registar(request):
     if request.method == 'POST':
         username = request.POST['username']
