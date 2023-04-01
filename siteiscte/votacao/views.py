@@ -12,10 +12,11 @@ from .models import Questao, Opcao, Aluno
 from django.shortcuts import render
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
+from django.urls import reverse_lazy
 # Feito por Grupo LEI-3
 limite_votos=13
 
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 import os
 
 def index(request):
@@ -29,11 +30,12 @@ def detalhe(request, questao_id):
     return render(request, 'votacao/detalhe.html',{'questao': questao})
 
 #autheticado
+@login_required(login_url=reverse_lazy('votacao:logar'))
 def resultados(request, questao_id):
     questao = get_object_or_404(Questao, pk=questao_id)
     return render(request, 'votacao/resultados.html', {'questao': questao})
 
-@login_required(login_url='/votacao/logar')
+@login_required(login_url=reverse_lazy('votacao:logar'))
 def voto(request, questao_id):
     if (request.POST['action']=="Voto"):
         questao = get_object_or_404(Questao, pk=questao_id)
@@ -59,6 +61,7 @@ def voto(request, questao_id):
         # voltar para a página web anterior.
         return HttpResponseRedirect(reverse('votacao:resultados',args=(questao.id,)))
     # apenas admin
+    # esta verificão de super_user tem de ser feita dentro da função, porque a view é usada quer para votar, quer para apagar opções
     if (request.POST['action']=="Remover Opção selecionada"):
         if not request.user.is_superuser:
             return Http404("O utilizador não tem permissões")
@@ -75,6 +78,7 @@ def criarquestao(request):
     return render(request, 'votacao/criarquestao.html')
 
 #apenas admin
+@user_passes_test(lambda u: u.is_superuser,login_url=reverse_lazy('votacao:logar'))
 def createquestion(request):
     if not request.user.is_authenticated:
         return Http404("O utilizador não está logado")
@@ -88,6 +92,7 @@ def createquestion(request):
     return render(request, 'votacao/criarquestao.html', {'error_message': "Nova pergunta criada"})
 
 #apenas admin
+@user_passes_test(lambda u: u.is_superuser,login_url=reverse_lazy('votacao:logar'))
 def remove_question(request, questao_id):
     if not request.user.is_authenticated:
         return Http404("O utilizador não está logado")
@@ -103,6 +108,7 @@ def criaropcao(request, questao_id):
     return render(request, 'votacao/criaropcao.html', {'questao': questao})
 
 #apenas admin
+@user_passes_test(lambda u: u.is_superuser,login_url=reverse_lazy('votacao:logar'))
 def createoption(request, questao_id):
     if not request.user.is_authenticated:
         return Http404("O utilizador não está logado")
@@ -132,6 +138,7 @@ def logar(request):
         return render(request, 'votacao/logar.html')
 
 # não estar registado
+@user_passes_test(lambda u: u is None)
 def registar(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -151,16 +158,19 @@ def registar(request):
         return render(request, 'votacao/registar.html')
 
 #autheticado
+@login_required(login_url='/votacao/logar')
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect(reverse('votacao:index'))
 
 #autheticado
+@login_required(login_url='/votacao/logar')
 def user_view(request):
     return render(request, 'votacao/user_view.html')
 
 #autheticado
 # exister maneira de guardar file em BD (forms.FileField), no entanto, decidimos usar como aparece no pdf de ficheiros estaticos
+@login_required(login_url='/votacao/logar')
 def fazer_upload(request):
     if request.method == 'POST' and request.FILES['myfile']:
         myfile = request.FILES['myfile']
