@@ -8,8 +8,9 @@
         <article class="login">
             {% if request.user.is_authenticated %}
             <p>{{request.user.username}}</p>
-            <!--    <img src="{% static 'media/troll.png' %}" >-->
             {% if not request.user.is_superuser %}
+            <p>{{request.user.aluno.foto_perfil}}</p>
+            <img src="{{request.user.aluno.foto_perfil}}" width="50" height="50" >
             <p>Número total de votos realizados: {{request.user.aluno.votos}}</p>
             {% endif %}
             <a class="butao" href="{% url 'votacao:logout_view' %}">Logout</a>

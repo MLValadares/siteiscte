@@ -16,6 +16,7 @@ from django.core.files.storage import FileSystemStorage
 limite_votos=13
 
 from django.contrib.auth.decorators import login_required
+import os
 
 def index(request):
     latest_question_list =Questao.objects.order_by('-pub_data')[:5]
@@ -163,7 +164,14 @@ def fazer_upload(request):
     if request.method == 'POST' and request.FILES['myfile']:
         myfile = request.FILES['myfile']
         fs = FileSystemStorage()
-        filename = fs.save(myfile.name, myfile)
+        aluno = get_object_or_404(Aluno, pk=request.user.aluno.pk)
+        k = "foto_perfil_"+str(aluno.pk)+".png"
+        if fs.exists(k):
+            os.remove(fs.path(k))
+        filename = fs.save(k, myfile)
+        k="/static/media/foto_perfil_"+str(aluno.pk)+".png"
+        aluno.foto_perfil= k
+        aluno.save()
         uploaded_file_url = fs.url(filename)
         return render(request, 'votacao/fazer_upload.html', {'uploaded_file_url': uploaded_file_url})
     return render(request, 'votacao/fazer_upload.html')
