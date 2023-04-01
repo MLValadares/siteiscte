@@ -12,8 +12,10 @@
             <img src="{{request.user.aluno.foto_perfil}}" width="50" height="50" ></p>
             <p>Número total de votos realizados: {{request.user.aluno.votos}}</p>
             {% endif %}
+            {% if request.user.is_superuser %}
+            <br>
+            {% endif %}
             <a class="butao" href="{% url 'votacao:logout_view' %}">Logout</a>
-
             <a class="butao" href="{% url 'votacao:user_view' %}">Ver conta</a>
             {% else %}
             <p>Utilizador Anónimo</p>
@@ -52,5 +54,13 @@
     </section>
     <section class="right" style="background-color:#ccc;"></section>
     <footer>
+        <p> Iscte – Instituto Universitário de Lisboa<br>
+            Avenida das Forças Armadas, 1649-026 Lisboa<br>
+            TEL +351 217 903 000<br>
+            geral@iscte.pt<br>
+            <a style="color: darkslateblue" href="https://www.iscte-iul.pt/contents/1379/contactenos">Contacte-nos</a>
+
+            </p>
+
     </footer>
 </div>

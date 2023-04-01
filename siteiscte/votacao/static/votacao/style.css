@@ -49,8 +49,11 @@ section.right {
 footer {
   grid-area: footer;
   background-color: #f1f1f1;
-  padding: 40px;
+  padding: 10px;
   text-align: center;
+  font-size: 20px;
+  font-family: bold;
+
 }
 article.login {
     background-color: rgb(255, 255, 255);
