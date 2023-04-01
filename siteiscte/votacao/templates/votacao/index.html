@@ -7,14 +7,14 @@
         <h3>LEI - Question Simulator</h3>
         <article class="login">
             {% if request.user.is_authenticated %}
-            <p>{{request.user.username}}</p>
+            <p>{{request.user.username}}
             {% if not request.user.is_superuser %}
-            <p>{{request.user.aluno.foto_perfil}}</p>
-            <img src="{{request.user.aluno.foto_perfil}}" width="50" height="50" >
+<!--            {{request.user.aluno.foto_perfil}}-->
+                <img src="{{request.user.aluno.foto_perfil}}" width="50" height="50" > </p>
             <p>Número total de votos realizados: {{request.user.aluno.votos}}</p>
             {% endif %}
             <a class="butao" href="{% url 'votacao:logout_view' %}">Logout</a>
-            <br><br>
+<!--            <br><br>-->
             <a class="butao" href="{% url 'votacao:user_view' %}">Ver conta</a>
             {% else %}
             <p>Utilizador Anónimo</p>
