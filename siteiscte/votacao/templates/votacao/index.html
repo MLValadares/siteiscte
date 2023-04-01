@@ -9,7 +9,6 @@
             {% if request.user.is_authenticated %}
             <p>{{request.user.username}}</p>
             {% if not request.user.is_superuser %}
-            <p>{{request.user.aluno.foto_perfil}}</p>
             <img src="{{request.user.aluno.foto_perfil}}" width="50" height="50" >
             <p>Número total de votos realizados: {{request.user.aluno.votos}}</p>
             {% endif %}
