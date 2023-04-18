@@ -1,6 +1,7 @@
 {% load static %}
 <link rel="stylesheet" type="text/css"
       href="{% static 'votacao/style.css' %}"/>
+<script type="text/javascript" src="{% static 'votacao/script.js' %}"></script>
 
 <div class="grid-container">
     <header>
@@ -9,7 +10,7 @@
             {% if request.user.is_authenticated %}
             <p>{{request.user.username}}
             {% if not request.user.is_superuser %}
-            <img src="{{request.user.aluno.foto_perfil}}" width="50" height="50" ></p>
+            <img src="{{request.user.aluno.foto_perfil}}" width="50" height="50" ondblclick="hidePhoto()" id="fperfil"></p>
             <p>Número total de votos realizados: {{request.user.aluno.votos}}</p>
             {% endif %}
             {% if request.user.is_superuser %}
