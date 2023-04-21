@@ -33,13 +33,6 @@ nav {
     'left middle middle middle middle right'
     'footer footer footer footer footer footer';
 }
-.grid-login{
-  display: grid;
-  grid-template-areas:
-    'p img'
-    'p p'
-    'button button';
-}
 
 section {
   padding: 10px;
