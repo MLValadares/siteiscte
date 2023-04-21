@@ -1,7 +1,3 @@
-<!--<header style="text-align:center;">-->
-
-<!--		<h1>LEI - Question Simulator - Register</h1>-->
-<!--</header>-->
 {% extends "votacao/index.html" %}
 {% block nav %}
     <a class="butao" href="https://www.iscte-iul.pt/">Site ISCTE</a>
@@ -22,8 +18,15 @@
     <input type="text" id="email" name="email"><br><br>
     <label for="password">Introduza a seu curso:</label>
     <input type="text" id="curso" name="curso"><br><br>
-
-	<input type="submit" value="Register">
+    <input type="submit" value="Register">
+</form>
+<form>
+    <label for="comentario">Comentário:</label>
+    <textarea id="comentario" name="comentario" rows="4" cols="50">
+        Insira o seu comentário aqui !
+    </textarea>
+    <p id="alerta_comentario"></p>
+    <button id="botao_validar">Validar comentário</button>
 </form>
 {% endblock %}
 {% block opcoes_e_controlos %}
