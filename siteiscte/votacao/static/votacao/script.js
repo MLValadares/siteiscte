@@ -3,13 +3,13 @@ function hidePhoto(){
     //if (x.style.display === "none") {
     //x.style.display = "block";
   //} else {
-    x.style.visibility= "hidden"
+    x.style.display= "none"
   //}
 }
 function showPhoto() {
     var x = document.getElementById("fperfil")
-    if (x.style.visibility === "hidden") {
-        x.style.visibility = "visible";
+    if (x.style.display === "none") {
+        x.style.display = "initial";
     }
 }
 

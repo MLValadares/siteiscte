@@ -5,6 +5,7 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     background: white url("../images/edificio_1_patio.jpg");
 }
+
 header {
     grid-area: header;
      background-color: #f1f1f1;
@@ -31,6 +32,13 @@ nav {
     'nav nav nav nav nav nav'
     'left middle middle middle middle right'
     'footer footer footer footer footer footer';
+}
+.grid-login{
+  display: grid;
+  grid-template-areas:
+    'p img'
+    'p p'
+    'button button';
 }
 
 section {
@@ -62,7 +70,7 @@ article.login {
     right: 20px;
     width: 300px;
     border-style: solid;
-    font-size: 15px;
+    font-size: 16px;
 }
 
 a.butao:link, a:visited {
