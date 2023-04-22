@@ -20,14 +20,17 @@
     <input type="text" id="curso" name="curso"><br><br>
     <input type="submit" value="Register">
 </form>
-<form>
-    <label for="comentario">Comentário:</label>
-    <textarea id="comentario" name="comentario" rows="4" cols="50">
-        Insira o seu comentário aqui !
-    </textarea>
-    <p id="alerta_comentario"></p>
-    <button id="botao_validar">Validar comentário</button>
-</form>
+<label for="comentario">Comentário:</label>
+<textarea id="comentario" name="comentario" rows="4" cols="50">
+    Insira o seu comentário aqui !
+</textarea>
+<p id="alerta_comentario"></p>
+<button id="btt1">Validar comentário</button>
 {% endblock %}
 {% block opcoes_e_controlos %}
+{% endblock %}
+{% block imports %}
+    {% load static %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script type="text/javascript" src="{% static 'votacao/script.js' %}"></script>
 {% endblock %}
